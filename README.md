@@ -1,35 +1,73 @@
-# TelecomX-Datos
+# Telecom X — análisis exploratorio de cancelación de clientes
 
-# Análisis de Evasión de Clientes (Churn) - Telecom X
+[English](README.en.md) · [Notebook](telecomx_datos.ipynb)
 
-## Propósito del Proyecto
-Este proyecto tiene como objetivo analizar la base de datos de la empresa de telecomunicaciones Telecom X para descubrir los motivos principales por los que los clientes cancelan su servicio (fenómeno conocido como *Churn*). 
+Ejercicio de análisis de datos basado en el desafío Telecom X de Alura. Explora diferencias entre registros con y sin cancelación de servicio y practica la preparación de datos para su análisis.
 
-A través de un proceso de limpieza de datos (ETL) y un Análisis Exploratorio (EDA) en Python, buscamos transformar datos crudos en información estratégica. El resultado final ayuda a identificar patrones de comportamiento y ofrece recomendaciones claras para retener a más usuarios.
+## Qué hace el notebook
 
-## Estructura del Proyecto
-El análisis está organizado de manera sencilla para facilitar su lectura y ejecución:
+- Descarga un archivo JSON público de Alura.
+- Aplana las estructuras `customer`, `phone`, `internet` y `account`.
+- Normaliza textos y convierte `Charges.Total` a valores numéricos.
+- Rellena cargos totales vacíos con cero y excluye registros con `Churn` vacío.
+- Simplifica categorías de servicios, cuenta duplicados y calcula `Cuentas_Diarias`.
+- Genera estadísticas descriptivas, conteos, gráficos de barras y diagramas de caja.
 
-* **`telecomx_datos.ipynb`**: Es el archivo principal del proyecto. Un Jupyter Notebook diseñado para ejecutarse en Google Colab. Contiene todo el código Python paso a paso, desde la descarga de los datos hasta las gráficas finales.
-* **Fuente de Datos**: Los datos no están guardados localmente, sino que el código se conecta directamente a una API pública para descargar la información en formato JSON, asegurando que siempre se trabaje con la versión correcta.
+Los gráficos comparan cancelación con contrato, método de pago, género, antigüedad y cargos. Describen asociaciones dentro del conjunto analizado; no demuestran causas ni una mejora real de retención.
 
-## Insights y Visualizaciones Clave
-Durante el análisis, utilizamos librerías como `seaborn` y `matplotlib` para hacer hablar a los números. Algunos de los descubrimientos más importantes fueron:
+## Datos y tecnologías
 
-1. **El peligro del contrato mensual:** Mediante gráficos de barras, confirmamos que los clientes con contratos "mes a mes" (Month-to-month) son los que más abandonan a la empresa.
-2. **Los primeros meses son críticos:** Utilizando Diagramas de Caja (Boxplots), descubrimos visualmente que la gran mayoría de las cancelaciones ocurren en los primeros meses de antigüedad. Si el cliente supera esa barrera, es muy probable que se quede.
-3. **El impacto del precio:** Los mismos diagramas de caja nos revelaron que los clientes que pagan las mensualidades más caras tienen una tendencia mucho mayor a cancelar el servicio.
+Fuente: [TelecomX_Data.json del desafío de Alura](https://raw.githubusercontent.com/alura-cursos/challenge2-data-science-LATAM/refs/heads/main/TelecomX_Data.json).
 
-> Nota para el lector: Dentro del notebook encontrarás los gráficos detallados que respaldan cada una de estas conclusiones.
+Python, pandas, NumPy, Matplotlib, seaborn y un entorno Jupyter. La fuente es un archivo alojado en GitHub, no una API de clientes en producción. La URL apunta a una rama que puede cambiar.
 
-## Instrucciones para Ejecutar el Notebook
-Replicar este análisis es muy sencillo. Solo necesitas seguir estos pasos:
+## Ejecutar
 
-1. Descarga el archivo `telecomx_datos.ipynb` de este repositorio.
-2. Entra a Google Colab y sube el archivo.
-3. No necesitas descargar ninguna base de datos manual. El primer bloque de código se encarga de extraer la información automáticamente desde la API.
-4. Las librerías utilizadas (`pandas`, `matplotlib`, `seaborn` y `numpy`) ya vienen instaladas por defecto en Google Colab.
-5. Ve al menú superior, selecciona "Entorno de ejecución" y haz clic en "Ejecutar todas". 
+Opción sencilla: abre [el notebook en Google Colab](https://colab.research.google.com/github/fabrizzio2901/TelecomX-Datos/blob/main/telecomx_datos.ipynb), conecta un entorno y ejecuta las celdas en orden desde un entorno limpio.
 
----
-**Autor:** Luis Fabrizzio Ramirez Romero
+Para trabajar localmente:
+
+```bash
+git clone https://github.com/fabrizzio2901/TelecomX-Datos.git
+cd TelecomX-Datos
+python -m venv .venv
+```
+
+Activa el entorno:
+
+```powershell
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+```
+
+```bash
+# macOS / Linux
+source .venv/bin/activate
+```
+
+```bash
+python -m pip install pandas numpy matplotlib seaborn jupyterlab
+python -m jupyterlab telecomx_datos.ipynb
+```
+
+Se necesita acceso a Internet para descargar el JSON. No se requieren credenciales.
+
+## Ejemplo de lectura
+
+Ejecuta todas las celdas y compara la distribución de `tenure` entre `Churn = yes` y `Churn = no`. Después revisa los conteos por `Contract`. Para comparar riesgos entre categorías con tamaños diferentes hace falta calcular tasas dentro de cada grupo; los conteos por sí solos no bastan.
+
+## Estado y límites
+
+El repositorio incluye el notebook y sus salidas guardadas. No contiene una aplicación desplegada, entrenamiento de modelos ni un archivo de dependencias con versiones fijadas.
+
+La imputación de `Charges.Total` con cero es una decisión del ejercicio y requiere revisar su pertinencia antes de reutilizar el análisis. El notebook cuenta duplicados, pero no ejecuta una eliminación de duplicados.
+
+No exporta `datos_tratados.csv`: cualquier proyecto posterior que dependa de ese archivo necesita un paso adicional de exportación documentado y verificable. Los resultados pertenecen al ejercicio; no son métricas de un cliente real.
+
+## Créditos
+
+Desafío y datos: Alura. Este repositorio contiene el desarrollo del ejercicio publicado en el perfil de [fabrizzio2901](https://github.com/fabrizzio2901).
+
+## Resultado verificado
+
+El 11 de septiembre de 2026 se ejecutaron en orden las 30 celdas de código no vacías, en un proceso Python limpio con pandas 3.0.5, Matplotlib 3.11.2 y seaborn 0.13.2. El flujo pasó de 7,267 registros de entrada a 7,043 registros y 22 columnas; `Churn` quedó con 5,174 valores `no` y 1,869 `yes`. Son conteos reproducidos del conjunto educativo, no indicadores de impacto comercial. No se probó la interfaz de Colab ni de JupyterLab.
