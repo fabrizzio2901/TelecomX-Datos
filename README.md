@@ -71,3 +71,7 @@ Desafío y datos: Alura. Este repositorio contiene el desarrollo del ejercicio p
 ## Resultado verificado
 
 El 11 de septiembre de 2026 se ejecutaron en orden las 30 celdas de código no vacías, en un proceso Python limpio con pandas 3.0.5, Matplotlib 3.11.2 y seaborn 0.13.2. El flujo pasó de 7,267 registros de entrada a 7,043 registros y 22 columnas; `Churn` quedó con 5,174 valores `no` y 1,869 `yes`. Son conteos reproducidos del conjunto educativo, no indicadores de impacto comercial. No se probó la interfaz de Colab ni de JupyterLab.
+
+## Mi participación
+
+Participé en la implementación del notebook de preparación y análisis de datos. Este ejercicio complementa mi trabajo de desarrollo full stack; su alcance es análisis de datos en Python.

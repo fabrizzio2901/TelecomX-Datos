@@ -71,3 +71,7 @@ Challenge and data: Alura. This repository contains the exercise published on [f
 ## Verified result
 
 On September 11, 2026, all 30 nonempty code cells ran in order in a clean Python process with pandas 3.0.5, Matplotlib 3.11.2 and seaborn 0.13.2. The workflow transformed 7,267 input records into 7,043 records and 22 columns, with 5,174 `no` and 1,869 `yes` churn labels. These are reproduced educational-dataset counts, not business-impact indicators. Colab and JupyterLab interfaces were not tested.
+
+## My contribution
+
+I contributed to implementing the data preparation and analysis notebook. This exercise complements my full-stack development work; its scope is data analysis in Python.
